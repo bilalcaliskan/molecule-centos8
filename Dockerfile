@@ -1,5 +1,6 @@
 FROM centos:8
 
+LABEL maintainer="bilalcaliskan"
 ENV container=docker
 ENV PIP_PACKAGES "pip ansible==2.9.16"
 ENV YUM_PACKAGES sudo which python3.9

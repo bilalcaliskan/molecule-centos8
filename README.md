@@ -3,6 +3,7 @@
 [![CI](https://github.com/bilalcaliskan/molecule-centos8/workflows/Build/badge.svg?branch=master&event=push)](https://github.com/bilalcaliskan/molecule-centos8/actions?query=workflow%3ABuild)
 [![Docker pulls](https://img.shields.io/docker/pulls/bilalcaliskan/molecule-centos8)](https://hub.docker.com/r/bilalcaliskan/molecule-centos8/)
 [![GitHub tag](https://img.shields.io/github/tag/bilalcaliskan/molecule-centos8.svg)](https://GitHub.com/bilalcaliskan/molecule-centos8/tags/)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
 CentOS 8 Docker container for Ansible playbook and role testing.
 
