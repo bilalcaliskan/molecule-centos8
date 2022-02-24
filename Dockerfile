@@ -1,7 +1,8 @@
 FROM centos:8
 
 ENV container=docker
-ENV pip_packages "ansible==2.9.16"
+ENV PIP_PACKAGES "pip ansible==2.9.16"
+ENV YUM_PACKAGES sudo which python3.9
 
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
@@ -16,16 +17,15 @@ RUN dnf install -y centos-release-stream --disablerepo=appstream --disablerepo=b
     && dnf swap -y centos-{linux,stream}-repos --disablerepo=appstream --disablerepo=baseos \
     && dnf distro-sync -y
 RUN dnf update -y \
-    && dnf install -y \
-        sudo \
-        which \
-        python3-pip \
+    && dnf install -y $YUM_PACKAGES \
+    && dnf remove -y python3.6 \
     && dnf clean all \
     && rm -rf /var/cache/dnf/
-RUN pip3 install --upgrade pip && pip3 install $pip_packages
+RUN pip3 install --upgrade $PIP_PACKAGES
 RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
 RUN mkdir -p /etc/ansible
 RUN echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
+WORKDIR /root
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/usr/lib/systemd/systemd"]
